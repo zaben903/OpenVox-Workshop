@@ -1,0 +1,9 @@
+active_release_attachment:
+  name: file
+  record: active_release (Release)
+  blob: active_release_blob
+
+deleted_release_attachment:
+  name: file
+  record: deleted_release (Release)
+  blob: deleted_release_blob

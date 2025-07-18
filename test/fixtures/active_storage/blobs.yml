@@ -1,0 +1,2 @@
+active_release_blob: <%= ActiveStorage::FixtureSet.blob filename: "one-active-0.0.1.tar.gz" %>
+deleted_release_blob: <%= ActiveStorage::FixtureSet.blob filename: "one-deprecated-0.0.1.tar.gz" %>
