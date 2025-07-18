@@ -80,12 +80,7 @@ module Pagination
         :downloads
       end
     elsif model.is_a? OpenVoxModule
-      case sort_by_param[:sort_by]
-      when "downloads"
-        :downloads
-      else
-        :downloads
-      end
+      :downloads
     end
   end
 end
