@@ -1,0 +1,55 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# == Schema Information
+#
+# Table name: releases
+#
+#  id                :bigint           not null, primary key
+#  changelog         :string
+#  deleted_at        :datetime
+#  deleted_for       :string
+#  downloads         :integer
+#  file_md5          :string           not null
+#  file_sha256       :string           not null
+#  file_size         :integer          not null
+#  license           :string
+#  metadata          :json             not null
+#  readme            :string
+#  reference         :string
+#  slug              :string           not null
+#  version           :string           not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  openvox_module_id :bigint           not null
+#
+# Indexes
+#
+#  index_releases_on_openvox_module_id              (openvox_module_id)
+#  index_releases_on_openvox_module_id_and_version  (openvox_module_id,version) UNIQUE
+#  index_releases_on_slug                           (slug) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (openvox_module_id => openvox_modules.id)
+#
+active_release:
+  openvox_module: active
+  slug: one-active-0.0.1
+  version: 0.0.1
+  downloads: 1
+  file_md5: <%= Digest::MD5.hexdigest("testing") %>
+  file_sha256: <%= Digest::SHA256.hexdigest("testing") %>
+  file_size: 1
+  metadata: {}
+
+deleted_release:
+  openvox_module: deprecated
+  slug: one-deprecated-0.0.1
+  version: 0.0.1
+  downloads: 1
+  file_md5: <%= Digest::MD5.hexdigest("testing") %>
+  file_sha256: <%= Digest::SHA256.hexdigest("testing") %>
+  file_size: 1
+  metadata: { }
+  deleted_at: 2025-07-15 19:19:30
+  deleted_for: Because testing said so
