@@ -15,16 +15,14 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-class CreateSessions < ActiveRecord::Migration[8.0]
-  def change
-    create_table :sessions do |t|
-      t.references :user, null: false, foreign_key: true
-      t.string :ip_address, null: false
-      t.string :user_agent, null: false
-      t.boolean :remember_me, null: false, default: false
-      t.string :token
+# Deletes old sessions periodically.
+# Deletes `remember_me: false` sessions after 1 day.
+# Deletes `remember_be: true` sessions after 3 months.
+class SessionExpiryJob < ApplicationJob
+  queue_as :low
 
-      t.timestamps
-    end
+  def perform
+    Session.where(remember_me: false, updated_at: ..1.day.ago).delete_all
+    Session.where(remember_me: true, updated_at: ..3.months.ago).delete_all
   end
 end

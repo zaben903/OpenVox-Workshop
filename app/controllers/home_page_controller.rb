@@ -15,16 +15,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-class CreateSessions < ActiveRecord::Migration[8.0]
-  def change
-    create_table :sessions do |t|
-      t.references :user, null: false, foreign_key: true
-      t.string :ip_address, null: false
-      t.string :user_agent, null: false
-      t.boolean :remember_me, null: false, default: false
-      t.string :token
+class HomePageController < ApplicationController
+  allow_unauthenticated_access only: [:index]
 
-      t.timestamps
-    end
+  def index
   end
 end

@@ -52,6 +52,9 @@ group :development, :test do
   # Standardrb
   gem "standard", "~> 1.50", require: false
   gem "standard-rails", require: false
+
+  # Code coverage for Ruby
+  gem "simplecov"
 end
 
 group :development do

@@ -19,13 +19,14 @@
 #
 # Table name: sessions
 #
-#  id         :bigint           not null, primary key
-#  ip_address :string
-#  token      :string
-#  user_agent :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint           not null
+#  id          :bigint           not null, primary key
+#  ip_address  :string           not null
+#  remember_me :boolean          default(FALSE), not null
+#  token       :string
+#  user_agent  :string           not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id     :bigint           not null
 #
 # Indexes
 #
@@ -37,10 +38,14 @@
 #
 class Session < ApplicationRecord
   belongs_to :user
-  before_create :generate_token, if: {api: true}
+  before_create :generate_token, if: ->() { self.api == true}
 
   # Set to true if this Session is being created through an API endpoint
-  attr_accessor :api, :boolean, default: false
+  attr_accessor :api
+
+  after_initialize do
+    self.api ||= false
+  end
 
   private
 

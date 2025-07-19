@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full bg-gray-100">
   <head>
-    <title><%= content_for(:title) || "Openvox Workshop" %></title>
+    <title><%= content_for(:title) ? "OpenVox Workshop - #{content_for(:title)}" : "OpenVox Workshop" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -22,9 +22,48 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+  <body class="h-full">
+    <div class="min-h-full">
+      <nav class="bg-gray-800">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="flex h-16 items-center justify-between">
+            <%= render "layouts/navigation" %>
+            <%= render "layouts/profile_dropdown" %>
+          </div>
+        </div>
+      </nav>
+
+      <header class="bg-white shadow-sm">
+        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+          <h1 class="text-3xl font-bold tracking-tight text-gray-900"><%= content_for(:title) %></h1>
+        </div>
+      </header>
+
+      <main>
+        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+          <%# Project not production ready alert %>
+          <div class="rounded-md bg-blue-50 p-4">
+            <div class="flex">
+              <div class="shrink-0">
+                <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5 text-blue-400">
+                  <path d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM9 9a.75.75 0 0 0 0 1.5h.253a.25.25 0 0 1 .244.304l-.459 2.066A1.75 1.75 0 0 0 10.747 15H11a.75.75 0 0 0 0-1.5h-.253a.25.25 0 0 1-.244-.304l.459-2.066A1.75 1.75 0 0 0 9.253 9H9Z" clip-rule="evenodd" fill-rule="evenodd" />
+                </svg>
+              </div>
+              <div class="ml-3 flex-1 md:flex md:justify-between">
+                <p class="text-sm text-blue-700">Please note: The OpenVox Workshop is not production ready and is expected to have bugs/issues. Please report any you find to the GitHub Issue Tracker.</p>
+                <p class="mt-3 text-sm md:mt-0 md:ml-6">
+                  <a href="https://github.com/zaben903/OpenVox-Workshop/issues" class="font-medium whitespace-nowrap text-blue-700 hover:text-blue-600">
+                    Issue Tracker
+                    <span aria-hidden="true"> &rarr;</span>
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <%= yield %>
+        </div>
+      </main>
+    </div>
   </body>
 </html>

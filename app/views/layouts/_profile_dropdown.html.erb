@@ -1,0 +1,42 @@
+<% urls = {
+  signed_in: {
+    "Profile" => "#",
+    "My modules" => "#",
+    "Settings" => "#",
+    "Sign out" => {
+      url: session_path,
+      method: :delete,
+    }
+  },
+  signed_out: {
+    "Sign in" => new_session_path,
+  }
+} %>
+
+<div class="hidden md:block">
+  <div class="ml-4 flex items-center md:ml-6">
+    <%# Profile dropdown %>
+    <div data-controller="user-dropdown" class="relative ml-3">
+      <div>
+        <button data-action="click->user-dropdown#toggle" id="user-menu-button" type="button" aria-expanded="false" aria-haspopup="true"
+                class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800">
+          <span class="absolute -inset-1.5"></span>
+          <span class="sr-only">Open user menu</span>
+          <img src="/icon.svg" alt="" class="size-8 rounded-full" />
+        </button>
+      </div>
+      <%# Dropdown Menu %>
+      <div data-user-dropdown-target="dropdown"
+           role="menu" tabindex="-1" aria-labelledby="user-menu-button" aria-orientation="vertical"
+           class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden opacity-0 scale-95">
+        <% urls[authenticated? ? :signed_in : :signed_out].each do |name, url| %>
+          <% if url.is_a? String %>
+            <%= link_to name, url, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:outline-hidden" %>
+          <% else %>
+            <%= link_to name, url[:url], data: {turbo_method: url[:method]}, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:outline-hidden" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
