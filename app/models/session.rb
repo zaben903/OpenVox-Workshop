@@ -38,7 +38,7 @@
 #
 class Session < ApplicationRecord
   belongs_to :user
-  before_create :generate_token, if: ->() { self.api == true}
+  before_create :generate_token, if: -> { api == true }
 
   # Set to true if this Session is being created through an API endpoint
   attr_accessor :api
