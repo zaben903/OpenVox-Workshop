@@ -39,3 +39,6 @@
 
 # Ignore IDE files
 /.idea
+
+# Ignore codecov
+/coverage

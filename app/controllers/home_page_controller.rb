@@ -16,8 +16,11 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 class HomePageController < ApplicationController
-  allow_unauthenticated_access only: [:index]
+  allow_unauthenticated_access only: [:index, :about]
 
   def index
+  end
+
+  def about
   end
 end
