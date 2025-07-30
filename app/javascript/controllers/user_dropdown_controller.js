@@ -20,6 +20,7 @@ export default class extends Controller {
 
   connect() {
     this._onTransitionEnd = this._onTransitionEnd.bind(this)
+    this._handleClickOutside = this._handleClickOutside.bind(this)
   }
 
   toggle() {
@@ -37,6 +38,7 @@ export default class extends Controller {
       this.dropdownTarget.classList.add("opacity-100", "scale-100")
     })
     this.dropdownTarget.addEventListener("transitionend", this._onTransitionEnd)
+    document.addEventListener("click", this._handleClickOutside)
   }
 
   _hide() {
@@ -46,6 +48,7 @@ export default class extends Controller {
       this.dropdownTarget.classList.add("opacity-0", "scale-95")
     })
     this.dropdownTarget.addEventListener("transitionend", this._onTransitionEnd)
+    document.removeEventListener("click", this._handleClickOutside)
   }
 
   _addTransitionClasses(easing, duration) {
@@ -70,5 +73,11 @@ export default class extends Controller {
         "duration-75",
         "transform"
     )
+  }
+
+  _handleClickOutside(event) {
+    if (!this.element.contains(event.target)) {
+      this._hide()
+    }
   }
 }
