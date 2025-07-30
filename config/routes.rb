@@ -33,6 +33,8 @@ Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
 
+  resources :modules, param: :slug, controller: :openvox_modules
+
   namespace :api do
     namespace :v3 do
       resource :session, only: [:create, :destroy]

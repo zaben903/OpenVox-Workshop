@@ -20,7 +20,8 @@ class CreateOpenVoxModules < ActiveRecord::Migration[8.0]
     create_table :openvox_modules do |t|
       t.string :slug, null: false
       t.string :name, null: false
-      t.integer :downloads
+      t.string :description, null: false
+      t.integer :downloads, default: 0, null: false
       t.timestamp :deprecated_at
       t.string :deprecated_for
       t.string :homepage_url, null: false

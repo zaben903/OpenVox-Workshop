@@ -8,7 +8,8 @@
 #  deleted          :boolean          default(FALSE)
 #  deprecated_at    :datetime
 #  deprecated_for   :string
-#  downloads        :integer
+#  description      :string           not null
+#  downloads        :integer          default(0), not null
 #  homepage_url     :string           not null
 #  issues_url       :string           not null
 #  name             :string           not null
@@ -32,6 +33,7 @@
 active:
   slug: active
   name: Test Module
+  description: This is an active module.
   homepage_url: https://example.com
   issues_url: https://example.com
   user: one
@@ -39,6 +41,7 @@ active:
 deprecated:
   slug: deprecated
   name: Deprecated Test Module
+  description: This is a deprecated module.
   homepage_url: https://example.com
   issues_url: https://example.com
   user: one

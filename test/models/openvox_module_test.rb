@@ -23,7 +23,8 @@
 #  deleted          :boolean          default(FALSE)
 #  deprecated_at    :datetime
 #  deprecated_for   :string
-#  downloads        :integer
+#  description      :string           not null
+#  downloads        :integer          default(0), not null
 #  homepage_url     :string           not null
 #  issues_url       :string           not null
 #  name             :string           not null

@@ -16,26 +16,31 @@ user.update!(password: "password", password_confirmation: "password")
 ## Active Module
 OpenVoxModule.find_or_initialize_by(
   name: "examplemodule",
-  slug: "example_module",
+  description: "This is an example module.",
   homepage_url: "https://example.com/",
   issues_url: "https://exmaple.com/",
   user: user
-).save
+).save!
 
 ## Deleted Module
 OpenVoxModule.find_or_initialize_by(
   name: "deletedmodule",
-  slug: "deleted_module",
+  description: "This is a deleted module.",
   homepage_url: "https://example.com/",
   issues_url: "https://exmaple.com/",
-  user: user
-).save
+  user: user,
+  deleted: true,
+  deprecated_at: Time.zone.now,
+  deprecated_for: "Things will go bang when installed!"
+).save!
 
 ## Deprecated Module
 OpenVoxModule.find_or_initialize_by(
   name: "deprecatedmodule",
-  slug: "deprecated_module",
+  description: "This is deprecated module.",
   homepage_url: "https://example.com/",
   issues_url: "https://exmaple.com/",
-  user: user
-).save
+  user: user,
+  deprecated_at: Time.zone.now,
+  deprecated_for: "examplemodule"
+).save!

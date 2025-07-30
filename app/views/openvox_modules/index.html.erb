@@ -1,0 +1,38 @@
+<% content_for :title do %>
+  Modules
+<% end %>
+
+<div class="px-4 sm:px-6 lg:px-8">
+  <div class="mt-8 flow-root">
+    <div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <div class="space-y-4">
+          <% @modules.each do |openvox_module| %>
+            <div class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-sm">
+              <div class="px-4 py-5 sm:px-6">
+                <div class="grid grid-cols-2">
+                  <%= link_to openvox_module.slug, module_path(openvox_module.slug), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" %>
+                  <div class="text-sm font-medium text-gray-900 text-right">Author: <%= openvox_module.user.display_name %></div>
+                </div>
+              </div>
+              <div class="px-4 py-5 sm:p-6">
+                <dl class="grid grid-cols-2 gap-4">
+                  <div>
+                    <dt class="text-sm font-medium text-gray-500">Name</dt>
+                    <dd class="mt-1 text-sm text-gray-900"><%= openvox_module.name %></dd>
+                  </div>
+                </dl>
+              </div>
+              <div class="px-4 py-4 sm:px-6">
+                <div class="grid grid-cols-2">
+                  <div class="text-sm font-medium text-gray-900">Version: x.y.z (dd/mm/yyyy)</div>
+                  <div class="text-sm font-medium text-gray-900 text-right">Downloads: <%= openvox_module.downloads %></div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

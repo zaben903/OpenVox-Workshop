@@ -45,7 +45,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_15_111930) do
   create_table "openvox_modules", force: :cascade do |t|
     t.string "slug", null: false
     t.string "name", null: false
-    t.integer "downloads"
+    t.string "description", null: false
+    t.integer "downloads", default: 0, null: false
     t.datetime "deprecated_at", precision: nil
     t.string "deprecated_for"
     t.string "homepage_url", null: false

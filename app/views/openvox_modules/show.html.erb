@@ -1,0 +1,54 @@
+<% content_for :title do %>
+  <%= @module.name %>
+<% end %>
+
+<div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+  <div class="mx-auto grid max-w-2xl grid-cols-1 grid-rows-1 items-start gap-x-8 gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+    <!-- Summary -->
+    <div class="lg:col-start-3 lg:row-end-1">
+      <h2 class="sr-only">Summary</h2>
+      <div class="rounded-lg bg-gray-50 shadow-xs ring-1 ring-gray-900/5">
+        <dl class="flex flex-wrap">
+          <div class="flex w-full flex-none gap-x-4 px-6 pt-6">
+            <dt class="flex-none">
+              <span class="sr-only">Author</span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+              </svg>
+            </dt>
+            <dd class="text-sm/6 font-medium text-gray-900"><%= @module.user.display_name %></dd>
+          </div>
+          <div class="flex w-full flex-none gap-x-4 px-6 pt-6">
+            <dt class="flex-none">
+              <span class="sr-only">Project URL</span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+              </svg>
+            </dt>
+            <dd class="text-sm/6 font-medium text-indigo-600 hover:text-indigo-500"><%= link_to @module.homepage_url, @module.homepage_url, target: "_blank" %></dd>
+          </div>
+          <div class="flex w-full flex-none gap-x-4 px-6 pt-6 mb-6">
+            <dt class="flex-none">
+              <span class="sr-only">Issue URL</span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+              </svg>
+            </dt>
+            <dd class="text-sm/6 font-medium text-indigo-600 hover:text-indigo-500"><%= link_to @module.issues_url, @module.issues_url, target: "_blank" %></dd>
+          </div>
+        </dl>
+        <% if can?(:manage, @module) %>
+          <div class="mt-6 border-t border-gray-900/5 px-6 py-6 text-center">
+            <%= link_to "Manage module", edit_module_path(@module), class: "text-sm/6 font-semibold text-indigo-600 hover:text-indigo-500" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Module Information -->
+    <div class="bg-gray-50 -mx-4 px-4 py-8 shadow-xs ring-1 ring-gray-900/5 sm:mx-0 sm:rounded-lg sm:px-8 sm:pb-14 lg:col-span-2 lg:row-span-2 lg:row-end-2 xl:px-16 xl:pt-16 xl:pb-20">
+      <h2 class="text-base font-semibold text-gray-900">Description</h2>
+      <p class="mt-2 text-gray-500"><%= @module.description %></p>
+    </div>
+  </div>
+</div>

@@ -23,7 +23,8 @@
 #  deleted          :boolean          default(FALSE)
 #  deprecated_at    :datetime
 #  deprecated_for   :string
-#  downloads        :integer
+#  description      :string           not null
+#  downloads        :integer          default(0), not null
 #  homepage_url     :string           not null
 #  issues_url       :string           not null
 #  name             :string           not null
@@ -55,6 +56,7 @@ class OpenVoxModule < ApplicationRecord
 
   validates :slug, presence: true, uniqueness: true, format: {with: /\A[a-zA-Z0-9]+[-\/][a-z][a-z0-9_]*\z/}
   validates :name, presence: true, format: {with: /\A[a-z][a-z0-9_]*\z/}
+  validates :description, presence: true, length: {maximum: 255}
   validates :homepage_url, presence: true, format: {with: URI::DEFAULT_PARSER.make_regexp(%w[http https])}
   validates :issues_url, presence: true, format: {with: URI::DEFAULT_PARSER.make_regexp(%w[http https])}
   validates :deprecated_for, presence: true, if: :deprecated_at?

@@ -15,17 +15,26 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-class ApplicationController < ActionController::Base
-  include Authentication
+require "test_helper"
 
-  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
-  allow_browser versions: :modern
+class OpenVoxModulesControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @openvox_module = openvox_modules(:active)
+    @user = users(:one)
+  end
 
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  test "should get index" do
+    get modules_url
+    assert_response :success
+  end
 
-  private
+  test "should get show" do
+    get module_url(@openvox_module.slug)
+    assert_response :success
+  end
 
-  def not_found
-    render file: Rails.public_path.join("404.html"), layout: false, status: :not_found
+  test "should return not found for non-existent module" do
+    get module_url("nonexistentslug")
+    assert_response :not_found
   end
 end

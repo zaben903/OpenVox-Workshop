@@ -15,17 +15,14 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-class ApplicationController < ActionController::Base
-  include Authentication
+class OpenVoxModulesController < ApplicationController
+  allow_unauthenticated_access only: [:index, :show]
 
-  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
-  allow_browser versions: :modern
+  def index
+    @modules = OpenVoxModule.includes(:user).active.order(:downloads).limit(10)
+  end
 
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found
-
-  private
-
-  def not_found
-    render file: Rails.public_path.join("404.html"), layout: false, status: :not_found
+  def show
+    @module = OpenVoxModule.includes(:user).find_by!(slug: params[:slug])
   end
 end
