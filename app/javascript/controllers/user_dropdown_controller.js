@@ -34,7 +34,7 @@ export default class extends Controller {
   _show() {
     this._addTransitionClasses("ease-out", "duration-100")
     requestAnimationFrame(() => {
-      this.dropdownTarget.classList.remove("opacity-0", "scale-95")
+      this.dropdownTarget.classList.remove("opacity-0", "scale-0")
       this.dropdownTarget.classList.add("opacity-100", "scale-100")
     })
     this.dropdownTarget.addEventListener("transitionend", this._onTransitionEnd)
@@ -45,7 +45,7 @@ export default class extends Controller {
     this._addTransitionClasses("ease-in", "duration-75")
     requestAnimationFrame(() => {
       this.dropdownTarget.classList.remove("opacity-100", "scale-100")
-      this.dropdownTarget.classList.add("opacity-0", "scale-95")
+      this.dropdownTarget.classList.add("opacity-0", "scale-0")
     })
     this.dropdownTarget.addEventListener("transitionend", this._onTransitionEnd)
     document.removeEventListener("click", this._handleClickOutside)
